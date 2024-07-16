@@ -1,2 +1,14 @@
-# I got this to work but it made a whole new Value so I'd have to figure out how to get it back into my df. Also, do I need to impute my NAs before I reexpress these categorical fields?
-rmd1 <- factor(medical_raw_data$Overweight, levels = c(0, 1), labels = c("no", "yes"))
+#used this to confirm there were NA values
+unique(medical_raw_data$Soft_drink)
+
+#switched Yes to 1 and No to 0
+sd_num <- revalue(x = medical_raw_data$Soft_drink, replace = c(Yes = 1, No = 0))
+
+#added this revalued info into my dataset (renamed mrd in a prior step not copied here)
+mrd$sd_numeric <- as.numeric(sd_num)
+
+#used line 13 to impute using mode but initially forgot to add "as.numeric" before "(names". it changed my numeric data type to chr (which i get since...
+#...I forgot to add the "as.numeric". but now I can't get it to change from chr data type to numeric so that I can view a histogram. I thought the code 
+#...on line 14 would work but it just prints out a bunch of the observations and my data is still chr type. Suggestions?
+mrd$sd_numeric[is.na(mrd$sd_numeric)] <- (names(which.max(table(mrd$sd_numeric))))
+as.numeric(mrd$sd_numeric)
