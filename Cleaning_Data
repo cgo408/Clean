@@ -1,0 +1,2 @@
+# I got this to work but it made a whole new Value so I'd have to figure out how to get it back into my df. Also, do I need to impute my NAs before I reexpress these categorical fields?
+rmd1 <- factor(medical_raw_data$Overweight, levels = c(0, 1), labels = c("no", "yes"))
